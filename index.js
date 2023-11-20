@@ -783,23 +783,46 @@ function clearLogInInputs () {
 
 
 /*________________________________SLIDER_____________________________*/
-const button= document.querySelectorAll('.button');
-const sliderBlock = document.querySelector('.slider_wrapper_1440px');
+const button= document.querySelectorAll('.button_inner');
+const sliderBlock = document.querySelector('.slider_content_1440px');
 
-let position = 0;
+let  arrSlidePos = [0, -33.4, -66.8]
+
+let currentBtn =0
+let position =0
+/*sliderBlock.style.transform = 'translateX(' + position + '%)'*/
+function findBtn () {
+  for (let i=0; i<button.length; i++) {
+       if (event.target === button[i]) {
+        currentBtn=i
+       }
+ }
+}
+
+function  getThePosition () {
+  for (let i = 0; i<arrSlidePos.length; i++) {
+    if (currentBtn === i ) {
+      position = arrSlidePos[i]
+    }
+  }
+}
+
+function showCurrSlides () {
+  sliderBlock.style.transform = 'translateX(' + position + '%)'
+}
 
 for (let i = 0; i < button.length; i++) {
   button[i].addEventListener('click', event => {
-    if (i === 0) {
-      position = 33.4;
-    } else if (i === 1) {
-      position = 0;
-    } else if (i === 2) {
-      position = -33.4;
-    }
-    sliderBlock.style.transform = 'translateX(' + position + '%)'
-  });
+    findBtn ()
+    console.log(currentBtn)
+    getThePosition ()
+    console.log(position)
+    showCurrSlides ()
+  })
+
 }
+
+
 /*/_______________________________SLIDER__________________________*/
 
 
